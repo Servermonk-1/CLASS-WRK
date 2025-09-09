@@ -1,14 +1,16 @@
 const express = require('express');
 const app = express();
+require('ejs')
+const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
-require("./models/user.model")
+const customerRouter = require("./routers/user.route")
+dotenv.config();
 
-
-
-
+const URI = process.env.URI;
 mongoose.connect(URI)
+
 	.then(() => {
 		console.log("DB Connected");
 	})
@@ -20,4 +22,12 @@ mongoose.connect(URI)
 let allCustomers = [];
 app.use("/user", customerRouter)
 
-app.post
+app.post("/register", (req, res) => {
+	res.send("Registered Successfully")
+})
+
+const port = process.env.PORT || 2132;
+app.listen(port, () => {
+	console.log("It's Working");
+
+})

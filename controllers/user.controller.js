@@ -1,4 +1,4 @@
-const customerModel = require("../models/customer.model")
+const customerModel = require("../models/user.model")
 
 exports.getSignup = (req, res) => {
 	res.render('signup')
@@ -18,9 +18,6 @@ exports.getRegister = (req, res) => {
 		})
 }
 
-exports.getSignIn = (req, res) => {
-	res.render('signin')
-}
 
 exports.getDashboard = (req, res) => {
 	customerModel.find()
@@ -30,7 +27,16 @@ exports.getDashboard = (req, res) => {
 		})
 		.catch((err) => {
 			console.log("Error retrieving customers: ", err);
+			res.status(500).send("Internal Server Error");
 		})
+}
+
+exports.postSignIn = (req, res) => {
+	res.render('signin')	
+}
+
+exports.postSignup = (req, res) => {
+	res.render('signup')	
 }
 
 
