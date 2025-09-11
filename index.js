@@ -5,7 +5,8 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
-const customerRouter = require("./routers/user.route")
+const customerRouter = require("./routers/user.route");
+const { name } = require('ejs');
 dotenv.config();
 
 const URI = process.env.URI;
@@ -17,6 +18,7 @@ mongoose.connect(URI)
 	.catch(err => {
 		console.error("MongoDB Error: ", err);
 	});
+
 
 
 let allCustomers = [];
@@ -31,3 +33,6 @@ app.listen(port, () => {
 	console.log("It's Working");
 
 })
+
+
+
